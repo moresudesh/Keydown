@@ -1,0 +1,136 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BMI Calculator</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+    <style>
+
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;600&family=Roboto:wght@300;400&display=swap');
+        
+        body{
+           font-family: 'Poppins', sans-serif;
+           color: #ffffff;
+        }
+        
+        .form-control{
+            padding: 6px 12px;
+            height: 45px;
+        }
+        
+        .wrapper{
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        padding: 20px;
+        border: 2px solid #c7c7c7;
+        border-radius: 10px;
+        width: 400px;
+        }
+        
+        label {
+            float: left;
+            font-size: 15px;
+        }
+        
+        p {
+            margin: 0 0 10px;
+            font-size: 16px;
+        }
+        
+        .wrapper h1{
+        display: block;
+        text-align: center;
+        }
+        
+        .wrapper form{text-align: center;}
+        .wrapper button{
+            background-color: aquamarine;
+            padding: 15px 30px;
+            border: none;
+            outline: none;
+            margin: 20px;
+            cursor: pointer;
+            font-size: 20px;
+            color: #000;
+        }
+        #showresult {
+            margin-bottom: 12px;
+        }
+        
+        #result {
+            margin: 10px;
+            font-size: 14px;
+            color: #ff0000;
+        }
+        
+        
+        /* Chrome, Safari, Edge, Opera */
+        input::-webkit-outer-spin-button,
+        input::-webkit-inner-spin-button {
+          -webkit-appearance: none;
+          margin: 0;
+        }
+        
+        /* Firefox */
+        input[type=number] {
+          -moz-appearance: textfield;
+        }
+        
+            </style>
+        
+</head>
+<body style="background-color: black;">
+    <div class="wrapper">
+        <h1>BMI Calculator</h1>
+        <form autocomplete="off">
+            <p><label>Height in CM:</label>
+            <input type="number" id="height" class="form-control" autocomplete="off">
+            </p>
+            <p><label>Weight in KG: </label>
+                <input type="number" id="Weight" class="form-control" autocomplete="off">
+            </p>
+            <button class="btn">Calculate</button>
+            <div id="result"></div>
+            <div id="showresult"></div>
+        </form>
+        <p class="underweight">Underweight: Less than 18.6</p>
+        <p class="normalrange">Normal Weight: 18.6 to 24.9</p>
+        <p class="overweight">Overweight: Greater than or equal to 25</p>
+    </div>
+    <script>
+        const form = document.querySelector(`form`);
+        form.addEventListener(`submit`, function(e){
+            e.preventDefault();
+
+            const height = parseInt(document.querySelector(`#height`).value);
+            const weight = parseInt(document.querySelector(`#Weight`).value);
+            const result = document.querySelector(`#result`);
+            const showResult = document.querySelector(`#showresult`);
+
+            if (isNaN(height) || isNaN(weight) || height <= 0 || weight <= 0) {
+                result.innerHTML = `Please provide valid height and weight.`;
+                return;
+            }
+
+            const bmi = (weight / ((height * height) / 10000)).toFixed(2);
+            result.innerHTML = `Your BMI: <span>${bmi}</span>`;
+
+            if (bmi < 18.6) {
+                showResult.innerHTML = `You are Underweight`;
+            } else if (bmi >= 18.6 && bmi <= 24.9) {
+                showResult.innerHTML = `You are Normal Weight`;
+            } else {
+                showResult.innerHTML = `You are Overweight`;
+            }
+        });
+    </script>
+</body>
+</html>
