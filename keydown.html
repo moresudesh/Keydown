@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" rel='stylesheet' type='text/css'>
+    <title>Random Key Press</title>
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+
+body{
+    font-family: 'Poppins', sans-serif;
+    color: #ffffff;
+}
+
+.wrapper{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+}
+
+.hidden{
+    display: none;
+}
+
+#Whichkey {
+    font-size: 100px;
+}
+
+
+</style>
+</head>
+<body style="background-color: #000000;">
+
+    <audio id="audio" controls style="display:none">
+        <source src="../assets/sound/Computer-keyboard-fast.mp3" type="audio/mpeg"> Your browser does not support the audio element.
+      </audio>
+
+
+    <div class="wrapper">
+        <span id="heading">Press any key</span>
+        <p id="Whichkey"></p>
+    </div>
+
+
+</body>
+
+
+<script>
+
+var audio = new Audio('');
+audio.play();
+
+
+const keyName = document.getElementById(`Whichkey`)
+const heading = document.getElementById(`heading`);
+
+document.addEventListener(`keydown`, function(e){
+    const detectkey = e.key;
+    keyName.innerHTML = detectkey.toUpperCase();
+    console.log(detectkey); 
+    document.getElementById('audio').play();
+    heading.classList.add(`hidden`)
+    document.body.style.backgroundColor = randomcolor();
+
+})
+
+function randomcolor(){
+    const hex = `0123456789ABCDEF`;
+    let key = `#`;
+
+    for (let i = 0; i < 6; i++) {
+        key += hex[Math.floor(Math.random() * 16)]; 
+        
+    }
+    return key;
+}
+
+
+</script>
+</html>
