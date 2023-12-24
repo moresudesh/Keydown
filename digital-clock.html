@@ -1,0 +1,70 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Digital Clock</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+    <style>
+
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;600&family=Roboto:wght@300;400&display=swap');
+        
+        body{
+           font-family: 'Poppins', sans-serif;
+           color: #ffffff;
+        }
+
+        #clock{
+            position: absolute;
+            top: 50%;
+            left:50%;
+            transform: translate(-50%, -50%);
+                
+        }
+
+        #current-time{
+            font-size: 45px;
+    text-shadow: 0 0 10px #00ff00, 0 0 20px #00ff00, 0 0 30px #00ff00;
+        }
+
+
+        @media screen and (max-width:600px){
+            #current-time {font-size: 33px;}
+        }
+        
+        
+            </style>
+        
+</head>
+<body style="background-color: black;">
+    <div class="wrapper">
+            <div id="clock">
+                <p id="current-time"></p>
+            </div>
+    </div>
+    <script>
+
+
+function updatetime(){
+    const now = new Date();
+    let hours = now.getHours();
+    const minutes = now.getMinutes();
+    const seconds = now.getSeconds();
+    let amOrPm = hours >= 12 ? 'PM' : 'AM';
+
+    hours = hours % 12 || 12; // Convert to 12-hour format
+
+    const currentTime = `${hours}:${minutes}:${seconds} ${amOrPm}`;
+    document.getElementById(`current-time`).innerHTML = currentTime;
+}
+
+setInterval(updatetime, 1000);
+
+    </script>
+</body>
+</html>
